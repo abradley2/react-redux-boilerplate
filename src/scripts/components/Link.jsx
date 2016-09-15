@@ -4,12 +4,13 @@ import router from '../router'
 export default function Link (props) {
 	return <a
 		{...props}
+		data-prevent-default='true'
 		onClick={e => {
-			debugger
 			router.navigate(props.href)
-			e.nativeEvent.preventDefault()
 		}}
 	>
+		<div style={{padding:'20px'}}>
 		{props.children}
+		</div>
 	</a>
 }
