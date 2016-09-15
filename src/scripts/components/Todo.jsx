@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 export default function Todo (props) {
-	return <div className='input-group'>
+	return <div className='todo input-group'>
 		<span className='input-group-btn'>
 			<button
 				className={props.completed ? 'btn btn-success' : 'btn btn-disabled'}

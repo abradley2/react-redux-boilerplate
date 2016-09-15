@@ -11,6 +11,7 @@ import {
 } from '../actions/TodoActions'
 
 import Todo from '../components/Todo'
+import TodoNavs from '../components/TodoNavs'
 
 class TodoList extends View {
 	constructor (props) {
@@ -19,6 +20,7 @@ class TodoList extends View {
 	}
 	render () {
 		return <div className='container'>
+			<TodoNavs />
 			<div className='col-sm-6'>
 				<div className='col-xs-12'>
 					<button
