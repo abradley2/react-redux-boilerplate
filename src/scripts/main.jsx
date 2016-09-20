@@ -23,28 +23,25 @@ store.dispatch({
 	type: '__START__'
 })
 
-document.addEventListener('click', function(e){
-  var from = findParent('a', e.target);
-  console.log('parent = ',e.target)
-  if (from && from.hasAttribute('data-prevent-default')){
-     /* it's a link, actions here */
-	  e.preventDefault()
-  }
-})
-//find first parent with tagName [tagname]
-function findParent(tagname,el){
-  if ((el.nodeName || el.tagName).toLowerCase()===tagname.toLowerCase()){
-    return el;
-  }
-  while (el = el.parentNode){
-    if ((el.nodeName || el.tagName).toLowerCase()===tagname.toLowerCase()){
-      return el;
-    }
-  }
-  return null;
-}
-
 document.addEventListener('DOMContentLoaded', function () {
 	appContainer = document.getElementById('app')
 	router.resolve()
 })
+
+document.addEventListener('click', function (e) {
+	var from = findParent('A', e.target)
+
+	if (from && from.hasAttribute('data-prevent-default')) {
+		e.preventDefault()
+	}
+})
+
+function findParent (tagName, el) {
+	if (el.tagName === tagName){
+		return el
+	} else if (el.parentNode) {
+		return findParent(tagName, el.parentNode)
+	} else {
+		return null
+	}
+}

@@ -1,6 +1,6 @@
 import * as Promise from 'bluebird'
 
-export function prop(initialVal) {
+export function prop (initialVal) {
 	var _val = initialVal
 
 	return function (newVal) {
@@ -11,7 +11,7 @@ export function prop(initialVal) {
 	}
 }
 
-export function request(opts) {
+export function request (opts) {
 	return new Promise(function (resolve, reject) {
 		var xhr = new XMLHttpRequest()
 
@@ -26,14 +26,12 @@ export function request(opts) {
 		}
 
 		xhr.onreadystatechange = function () {
-			if (
-				xhr.readyState === XMLHttpRequest.DONE
-				&& xhr.status >= 200
-				&& xhr.status < 400
-			) {
-				resolve(xhr.response)
-			} else {
-				reject(xhr.response)
+			if (xhr.readyState === xhr.readyState === XMLHttpRequest.DONE) {
+				if (xhr.status >= 200 && xhr.status < 400) {
+					resolve(xhr.response)
+				} else {
+					reject(xhr.response)
+				}
 			}
 		}
 
@@ -44,4 +42,23 @@ export function request(opts) {
 
 		xhr.send(opts.data)
 	})
+}
+
+export function assign (target) {
+	if (target === undefined || target === null) {
+		throw new TypeError('Cannot convert undefined or null to object')
+	}
+
+	var output = Object(target)
+	for (var index = 1; index < arguments.length; index++) {
+		var source = arguments[index]
+		if (source !== undefined && source !== null) {
+			for (var nextKey in source) {
+				if (source.hasOwnProperty(nextKey)) {
+					output[nextKey] = source[nextKey]
+				}
+			}
+		}
+	}
+	return output;
 }

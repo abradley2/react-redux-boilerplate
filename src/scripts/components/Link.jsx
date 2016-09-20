@@ -9,8 +9,6 @@ export default function Link (props) {
 			router.navigate(props.href)
 		}}
 	>
-		<div style={{padding:'20px'}}>
 		{props.children}
-		</div>
 	</a>
 }
