@@ -26,7 +26,7 @@ export function request (opts) {
 		}
 
 		xhr.onreadystatechange = function () {
-			if (xhr.readyState === xhr.readyState === XMLHttpRequest.DONE) {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
 				if (xhr.status >= 200 && xhr.status < 400) {
 					resolve(xhr.response)
 				} else {
