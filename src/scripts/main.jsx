@@ -6,17 +6,19 @@ import TodoList from './views/TodoList'
 
 var appContainer
 
-router.on('/todos/:filter', function (ctx) {
-	render(
-		<TodoList state={store.getState()} filter={ctx.filter} />
-		, appContainer)
-})
-
-router.on('/', function () {
-	console.log('default view')
-	render(
-		<TodoList filter='all' />
-		, appContainer)
+router.on({
+	'/': function (ctx) {
+		render(
+			<TodoList filter='all' />
+			, appContainer
+		)
+	},
+	'/todos/:filter': function (ctx) {
+		render(
+			<TodoList state={store.getState()} filter={ctx.filter} />
+			, appContainer
+		)
+	}
 })
 
 store.dispatch({

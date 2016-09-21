@@ -31,17 +31,29 @@ class TodoList extends View {
 					</button>
 				</div>
 				<div className='todos col-xs-12'>
-				{this.state.Todos.toJS().map(todo => {
-					return <Todo
-						{...todo}
-						key={todo.uid}
-						onEditTitle={title => {
-							this.actions[EDIT_TITLE](todo.uid, title)
-						}}
-						onToggleCompleted={this.actions[TOGGLE_COMPLETED].bind(todo, todo.uid)}
-						onRemoveClicked={this.actions[REMOVE].bind(todo, todo.uid)}
-					/>
-				})}
+				{this.state.Todos.toJS()
+					.filter(todo => {
+						switch (this.props.filter) {
+							case 'completed':
+								return todo.completed
+							case 'incompleted':
+								return !todo.completed
+							default:
+								return true
+						}
+					})
+					.map(todo => {
+						return <Todo
+							{...todo}
+							key={todo.uid}
+							onEditTitle={title => {
+								this.actions[EDIT_TITLE](todo.uid, title)
+							}}
+							onToggleCompleted={this.actions[TOGGLE_COMPLETED].bind(todo, todo.uid)}
+							onRemoveClicked={this.actions[REMOVE].bind(todo, todo.uid)}
+						/>
+					})
+				}
 				</div>
 			</div>
 		</div>
